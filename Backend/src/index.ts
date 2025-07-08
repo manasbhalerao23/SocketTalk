@@ -20,12 +20,24 @@ wss.on("connection", (socket) => {
             )
         }
         if(parsedmessage.type == 'chat'){
-            const CurrentUserRoom = allsockets.find((x) => x.socket == socket)?.room;
-            for(let i=0; i < allsockets.length; i++){
-                if(allsockets[i].room == CurrentUserRoom){
-                    allsockets[i].socket.send(parsedmessage.payload.message)
+            const sender = allsockets.find((u) => u.socket === socket);
+            if (!sender) return; // safeguard
+            const { room: senderRoom } = sender;
+            const { user, message: text } = parsedmessage.payload;
+
+            const payload = JSON.stringify({
+                user,
+                text,
+            });
+            allsockets.forEach((u) => {
+                if (u.room === senderRoom && u.socket.readyState === WebSocket.OPEN) {
+                u.socket.send(payload);
                 }
-            }
+            });
         }
-    })
-})
+    });
+
+    socket.on("close", () => {
+        allsockets = allsockets.filter((u) => u.socket !== socket);
+    });
+});
