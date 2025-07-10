@@ -1,6 +1,6 @@
-# SocketTalk
+# Chat Room
 
-SocketTalk is a real-time chat application built with a TypeScript-based WebSocket backend and a modern React + TypeScript + Tailwind frontend. The project demonstrates how to create multi-room chat functionality using WebSockets for instant message delivery between clients.
+Chat Room is a real-time chat application built with a TypeScript-based WebSocket backend and a modern React + TypeScript + Tailwind frontend. The project demonstrates how to create multi-room chat functionality using WebSockets for instant message delivery between clients.
 
 ## Features
 
@@ -11,7 +11,7 @@ SocketTalk is a real-time chat application built with a TypeScript-based WebSock
 ## Project Structure
 
 ```
-SocketTalk/
+Chat Room/
 ├── Backend/         # Node.js + TypeScript WebSocket server
 │   └── src/
 │       └── index.ts
